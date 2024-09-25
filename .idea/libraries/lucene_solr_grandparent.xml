@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="lucene-solr-grandparent">
+    <CLASSES>
+      <root url="file://D:/libs/lucene-solr-grandparent" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

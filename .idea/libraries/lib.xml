@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://D:/lib.zip!/" />
+      <root url="file://D:/libs/analysis" />
+      <root url="file://D:/libs/lucene-analyzers-common" />
+      <root url="file://D:/libs/lucene-core" />
+      <root url="file://D:/libs/lucene-parent" />
+      <root url="file://D:/libs/lucene-solr-grandparent" />
+      <root url="file://D:/libs/morphology" />
+      <root url="jar://D:/libs/morphology/russian/1.5/russian-1.5.jar!/" />
+      <root url="jar://D:/libs/lucene-core/8.11.0/lucene-core-8.11.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
