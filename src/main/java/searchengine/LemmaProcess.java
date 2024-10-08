@@ -7,13 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.Response;
 import org.apache.lucene.morphology.LuceneMorphology;
 import org.apache.lucene.morphology.russian.RussianLuceneMorphology;
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import searchengine.model.Index;
 import searchengine.model.Lemma;
-import searchengine.model.PageDto;
 import searchengine.model.SiteDto;
 import searchengine.repositorys.*;
 
@@ -29,7 +25,6 @@ import java.util.List;
 import java.util.concurrent.ForkJoinPool;
 
 import searchengine.repositorys.PageRepository;
-import searchengine.services.ParsePageTask;
 
 @Slf4j
 @Getter
@@ -45,8 +40,6 @@ public class LemmaProcess
     @Autowired
     private static IndexRepository indexRepository;
     private static String pageUrl;
-
-
 
     public LemmaProcess(PageRepository pageRepository, SiteRepository siteRepository, String pageUrl) {
         this.pageRepository = pageRepository;
@@ -84,7 +77,7 @@ public class LemmaProcess
 
     }
 
-    private static void saveLemmasAndIndex(HashMap<String, Integer> lemmas)
+    public static void saveLemmasAndIndex(HashMap<String, Integer> lemmas)
     {
         for (String key : lemmas.keySet())
         {
@@ -104,7 +97,6 @@ public class LemmaProcess
             index.setRank(lemma.getFrequency());
         }
     }
-
 
     public static HashMap<String, Integer> getLemmas(String text) throws IOException {
          HashSet<String> STOP_WORDS = new HashSet<>(Arrays.asList(
@@ -160,4 +152,5 @@ public class LemmaProcess
         ParsePageTask parsePageTask = new ParsePageTask(urlText, siteId ,pageRepository, pool);
 
     }
+
 }

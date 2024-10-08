@@ -15,8 +15,8 @@ public class Lemma
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "site_id", nullable = false)
-    private SiteDto siteId;
+    @JoinColumn(name = "page_id", nullable = false)
+    private PageDto pageId;
     @NotNull
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")
     private String lemma;

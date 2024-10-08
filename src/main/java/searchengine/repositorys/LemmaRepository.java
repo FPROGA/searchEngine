@@ -13,4 +13,6 @@ public interface LemmaRepository extends JpaRepository<Lemma, Integer>
     void deleteByUrl(String pageUrl);
 
     int countBySiteId();
+
+    int getFrequency(String lemma);
 }

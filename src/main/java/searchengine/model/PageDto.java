@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Entity
@@ -28,11 +30,21 @@ public class PageDto {
 
     @NotNull
     private int code;
-
+    @NotNull
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL")
+    private String name;
     @NotNull
     @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
+    private ArrayList<Lemma> lemmas;
 
 
+    public List<Lemma> getLemmas() {
+        return lemmas;
+    }
+
+    public void setLemmas(ArrayList<Lemma> lemmas) {
+        this.lemmas = lemmas;
+    }
 }
 

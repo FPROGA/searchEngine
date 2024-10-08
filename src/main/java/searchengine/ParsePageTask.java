@@ -1,4 +1,4 @@
-package searchengine.services;
+package searchengine;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Response;

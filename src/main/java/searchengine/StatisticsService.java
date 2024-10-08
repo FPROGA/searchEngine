@@ -1,4 +1,4 @@
-package searchengine.services;
+package searchengine;
 
 import org.apache.catalina.connector.Response;
 import searchengine.dto.statistics.StatisticsResponse;

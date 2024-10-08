@@ -17,4 +17,6 @@ public interface PageRepository extends JpaRepository<PageDto, Integer>
    void deleteByUrl(String url);
 
    int countBySiteId();
+
+   List<PageDto> findByLemma(String lemma);
 }

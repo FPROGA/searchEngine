@@ -1,26 +1,21 @@
-package searchengine.services;
+package searchengine;
 
 
-import org.apache.coyote.Response;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import searchengine.model.PageDto;
 import searchengine.model.SiteDto;
-import searchengine.model.Status;
 import searchengine.repositorys.PageRepository;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 

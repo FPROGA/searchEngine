@@ -1,10 +1,9 @@
-package searchengine.services;
+package searchengine;
 
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import searchengine.config.Site;
 import searchengine.config.SitesList;
 import searchengine.dto.statistics.DetailedStatisticsItem;
 import searchengine.dto.statistics.StatisticsData;
@@ -24,10 +23,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
 
 
 @Service
@@ -120,14 +116,12 @@ public class StatisticsServiceImpl implements StatisticsService{
     {
         String path = "application.yaml";
         List<String> sites  = getSites(path);
-        for (String siteUrl:sites)
-        {
+        Response response = new Response();
+        // оптимизация индексирования
+        try {
+        sites.parallelStream().forEach(siteUrl -> {
             if (indexingTasks.contains(siteUrl)) {
-                // Возвращаем ошибку, если индексация уже запущена
-                Response response = new Response();
-                response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
-                response.setContentType("Индексация уже запущена");
-                return response;
+                throw new RuntimeException("Индексация уже запущена");
             }
             deleteSiteByUrl(siteUrl);
 
@@ -143,19 +137,22 @@ public class StatisticsServiceImpl implements StatisticsService{
             if (parser.getError() != null) {
                 siteDto.setStatus(Status.FAILED);
                 siteDto.setLastError(parser.getError().getMessage());
-
-            }
-            else {
+            } else {
                 siteDto.setStatus(Status.INDEXED);
             }
             siteDto.setStatusTime(LocalDateTime.now());
             siteRepository.save(siteDto);
             indexingTasks.remove(siteUrl);
-        }
-        Response response = new Response();
+        });
         response.setStatus(HttpServletResponse.SC_OK);
+    } catch (RuntimeException e) {
+        response.setStatus(HttpServletResponse.SC_EXPECTATION_FAILED);
+        response.setContentType(e.getMessage());
+    }
+
         return response;
     }
+
     @Override
     public Response stopIndexing()
     {
@@ -189,4 +186,5 @@ public class StatisticsServiceImpl implements StatisticsService{
 
 
     }
+
 }
