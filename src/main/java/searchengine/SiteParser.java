@@ -22,9 +22,13 @@ import java.util.concurrent.RecursiveAction;
 
 public class SiteParser extends RecursiveAction {
     private static final Set<String> visitedUrls = new HashSet<>();
+
     private final SiteDto siteDto;
+
     private final PageRepository pageRepository;
+
     private final ForkJoinPool pool;
+
     private Throwable error;
 
     public SiteParser(SiteDto siteDto, PageRepository pageRepository, ForkJoinPool pool) {

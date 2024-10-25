@@ -6,8 +6,7 @@ import org.apache.lucene.morphology.russian.RussianLuceneMorphology;
 import java.io.IOException;
 import java.util.List;
 
-public class CheckLemmaService
-{
+public class CheckLemmaService {
     public static void main(String[] args) {
         LuceneMorphology luceneMorph =
                 null;

@@ -1,10 +1,17 @@
 package searchengine.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +37,16 @@ public class PageDto {
 
     @NotNull
     private int code;
+
     @NotNull
     @Column(columnDefinition = "VARCHAR(255) NOT NULL")
     private String name;
+
     @NotNull
     @Column(columnDefinition = "MEDIUMTEXT")
     private String content;
-    private ArrayList<Lemma> lemmas;
 
+    private ArrayList<Lemma> lemmas;
 
     public List<Lemma> getLemmas() {
         return lemmas;

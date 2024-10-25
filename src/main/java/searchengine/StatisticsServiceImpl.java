@@ -30,14 +30,20 @@ import java.util.concurrent.ForkJoinPool;
 public class StatisticsServiceImpl implements StatisticsService{
 
     private final Random random = new Random();
+
     private final SitesList sites;
+
     @Autowired
     private SiteRepository siteRepository;
+
     @Autowired
     private PageRepository pageRepository;
+
     @Autowired
     private LemmaRepository lemmaRepository;
+
     private ForkJoinPool pool = new ForkJoinPool();
+
     private final ArrayList<String> indexingTasks = new ArrayList<>();
 
     public StatisticsServiceImpl(SitesList sites) {
@@ -81,6 +87,7 @@ public class StatisticsServiceImpl implements StatisticsService{
         response.setResult(true);
         return response;
     }
+
     public void deleteSiteByUrl(String url)
     {
         SiteDto site = siteRepository.findByUrl(url);
@@ -92,8 +99,7 @@ public class StatisticsServiceImpl implements StatisticsService{
         }
     }
 
-    public List<String> getSites(String path)
-    {
+    public List<String> getSites(String path) {
         List<String> sites = new ArrayList<>();
         try
         {
@@ -112,8 +118,7 @@ public class StatisticsServiceImpl implements StatisticsService{
         return sites;
     }
 
-    public Response startIndexing()
-    {
+    public Response startIndexing() {
         String path = "application.yaml";
         List<String> sites  = getSites(path);
         Response response = new Response();
@@ -154,8 +159,7 @@ public class StatisticsServiceImpl implements StatisticsService{
     }
 
     @Override
-    public Response stopIndexing()
-    {
+    public Response stopIndexing() {
         if (pool != null) {
             pool.shutdownNow();
             while (!pool.isTerminated()) {
@@ -183,8 +187,6 @@ public class StatisticsServiceImpl implements StatisticsService{
             response.setContentType("Индексация не запущена");
             return response;
         }
-
-
     }
 
 }

@@ -2,8 +2,7 @@ package searchengine;
 
 import org.apache.catalina.connector.Response;
 
-public interface LemmaService
-{
+public interface LemmaService {
     Response lemprocess();
 }
 

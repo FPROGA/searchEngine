@@ -29,16 +29,19 @@ import searchengine.repositorys.PageRepository;
 @Slf4j
 @Getter
 @Setter
-public class LemmaProcess
-{
+public class LemmaProcess {
     @Autowired
     private static PageRepository pageRepository;
+
     @Autowired
     private static  SiteRepository siteRepository;
+
     @Autowired
     private static LemmaRepository lemmaRepository;
+
     @Autowired
     private static IndexRepository indexRepository;
+
     private static String pageUrl;
 
     public LemmaProcess(PageRepository pageRepository, SiteRepository siteRepository, String pageUrl) {
@@ -77,8 +80,7 @@ public class LemmaProcess
 
     }
 
-    public static void saveLemmasAndIndex(HashMap<String, Integer> lemmas)
-    {
+    public static void saveLemmasAndIndex(HashMap<String, Integer> lemmas) {
         for (String key : lemmas.keySet())
         {
             Lemma lemma = new Lemma();
@@ -146,6 +148,7 @@ public class LemmaProcess
         }
         return text.trim();
     }
+
     public static void saveHtmlTextToDataBase(String text, String urlText) throws IOException {
         ForkJoinPool pool = new ForkJoinPool();
         SiteDto siteId = siteRepository.findByUrl(urlText);

@@ -15,13 +15,19 @@ import java.util.concurrent.RecursiveAction;
 
 public class ParsePageTask extends RecursiveAction {
     private final String url;
+
     private final SiteDto siteId;
+
     private final PageRepository pageRepository;
+
     private final ForkJoinPool pool;
+
     private Throwable error;
+
     public Throwable getError() {
         return error;
     }
+
     public ParsePageTask(String url, SiteDto siteId, PageRepository pageRepository, ForkJoinPool pool) {
         this.url = url;
         this.siteId = siteId;
